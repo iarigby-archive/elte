@@ -100,6 +100,10 @@ public class Baby {
 		for (Baby baby : babies) System.out.println(baby);
 	}
 
+	public static void printGifts(ArrayList<Gift> gifts) {
+		for (Gift gift : gifts) System.our.println(gift);
+	}
+
 	@Override
 	public String toString() {
 		

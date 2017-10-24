@@ -15,4 +15,11 @@ public class Gift {
 		this.date = date;
 	}
 
+	@Override
+	public String toString(Gift gift) {
+
+		return description + " was given by " + name + " on " + date;
+	
+	}
+ 
 }
