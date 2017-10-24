@@ -11,11 +11,7 @@ public class Baby {
 	private char gender;
 	private static SimpleDateFormat myFormat = new SimpleDateFormat("ddMMyyyy HHmm");
 
-	private static ArrayList<Gift> gifts = new ArrayList<Gift>();
-
-
 	public Baby() {
-
 		
 	}
 
@@ -100,9 +96,7 @@ public class Baby {
 		for (Baby baby : babies) System.out.println(baby);
 	}
 
-	public static void printGifts(ArrayList<Gift> gifts) {
-		for (Gift gift : gifts) System.our.println(gift);
-	}
+	
 
 	@Override
 	public String toString() {
@@ -116,14 +110,33 @@ public class Baby {
 
 	public boolean equals(Baby baby) { return this.name.equals(baby.name) && this.birthday == baby.birthday && this.gender == baby.gender;}
 	
-	public static ArrayList<Gift> getGifts() {return gifts;}
 
-	public static void addGift(String name, String description, String date) throws ParseException {
-		
-		Gift gift = new Gift(name, description, myFormat.parse(date));
-		gifts.add(gift);
+	//
+	//handling gifts
 	
+	private static ArrayList<Gift> gifts = new ArrayList<Gift>();
+
+
+	public static void printGifts() {
+		
+		for (Gift gift : gifts) System.out.println(gift);
 	}
+
+	public static ArrayList<Gift> getGifts() { return gifts; }
+
+	public static void addGift(Gift gift) { gifts.add(gift); }
+
+
+	public static void addGift(String name, String description, String date) throws ParseException { 
+		
+		gifts.add(new Gift(name, description, myFormat.parse(date))); 
+	}
+
+	public static void addGift(String name, String description) { 
+		
+		gifts.add(new Gift(name, description, new Date())); 
+	}
+
 
 	/*
 

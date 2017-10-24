@@ -23,10 +23,16 @@ public class BabyRegister {
 			Baby baby5 = new Baby("06102017 1330", "five", 'm');
 			babies.add(baby5);	
 			Baby baby6 = new Baby(new Date(), "six", 'm');
-			babies.add(baby6);				
-		} catch (Exception e) {
+			babies.add(baby6);	
+			Baby.addGift("someone", "something");
+			Baby.addGift("someone else", "something else", "15102017 1400");
+
+		} catch (ParseException e) {
 			System.out.print(e);
 		}
+
+
+
 
 		Scanner in = new Scanner(System.in);
 		String input;
@@ -63,7 +69,7 @@ public class BabyRegister {
 							repeat = false;
 							System.out.println("Baby added successfully");
 						} catch (ParseException e) {
-							System.err.println("\tPlease enter date in following format - ddMMyyyy HHmm: ");
+							System.err.print("\tPlease enter date in following format - ddMMyyyy HHmm: ");
 							repeat = true;
 						}
 					}
@@ -104,7 +110,7 @@ public class BabyRegister {
 
 				case "5":
 
-					System.out.println(Baby.getGifts());
+					Baby.printGifts();
 					break;	
 			}
 		} while (!input.equals("exit"));
