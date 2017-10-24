@@ -12,36 +12,32 @@ public class BabyRegister {
 		
 		
 		try {
-			Baby baby1 = new Baby("05102016 1330", "one", 'f');
-			babies.add(baby1);
-			Baby baby2 = new Baby("05102016 1330", "two", 'm');
-			babies.add(baby2);		
-			Baby baby3 = new Baby("05102017 1330", "three", 'm');
-			babies.add(baby3);
-			Baby baby4 = new Baby("05102017 1331", "four", 'm');
-			babies.add(baby4);				
-			Baby baby5 = new Baby("06102017 1330", "five", 'm');
-			babies.add(baby5);	
-			Baby baby6 = new Baby(new Date(), "six", 'm');
-			babies.add(baby6);	
+
+			babies.add(new Baby("05102016 1330", "one", 'f'));
+			babies.add(new Baby("05102016 1330", "two", 'm'));		
+			babies.add(new Baby("05102017 1330", "three", 'm'));
+			babies.add(new Baby("05102017 1331", "four", 'm'));				
+			babies.add(new Baby("06102017 1330", "five", 'm'));	
+			babies.add(new Date(), "six", 'm');	
+
 			Baby.addGift("someone", "something");
 			Baby.addGift("someone else", "something else", "15102017 1400");
+			Baby.addGift(new Gift("person", "gift1", new Date()));
 
 		} catch (ParseException e) {
 			System.out.print(e);
 		}
 
 
-
-
+		String welcometext = "\n\n enter number for your choice (Type 'exit' to quit) \n 1. Add a new Baby \n 2. List Babies by age (ascending) \n 3. List Babies by name \n 4. Add gift \n 5. List gifts: ";
 		Scanner in = new Scanner(System.in);
 		String input;
-		String welcometext = "\n\n enter number for your choice (Type 'exit' to quit) \n 1. Add a new Baby \n 2. List Babies by age (ascending) \n 3. List Babies by name \n 4. Add gift \n 5. List gifts: ";
 		boolean repeat;
 		
-
 		System.out.println("Hello!");
+
 		do {
+
 			System.out.print(welcometext);
 			input = in.nextLine();
 			switch (input) {
@@ -51,7 +47,6 @@ public class BabyRegister {
 					System.out.print("Enter Baby's name: ");
 					String name = in.nextLine();
 					
-					//so gender is only male or female
 					char gender;
 					do {
 						System.out.print("Enter Baby's gender (f or m): ");
@@ -73,6 +68,7 @@ public class BabyRegister {
 							repeat = true;
 						}
 					}
+
 					break;
 
 				case "2":
@@ -113,9 +109,8 @@ public class BabyRegister {
 					Baby.printGifts();
 					break;	
 			}
-		} while (!input.equals("exit"));
 
-		
+		} while (!input.equals("exit"));	
 	
 	}
 

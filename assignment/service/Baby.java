@@ -140,6 +140,7 @@ public class Baby {
 
 	/*
 
+	//everything else is exactly the same, sort by name is working but age has random order for some reason (not decreasing, not increasing)
 	public static ArrayList<Baby> bubbleSort(ArrayList<Baby> babies, String type) {
 			
 			ArrayList<Baby> result = new ArrayList<Baby>(babies);
@@ -150,6 +151,7 @@ public class Baby {
 				sorted = true;
 				for (int j = 0; j < result.size()-1; j++) {
 					switch (type) {
+						//copied if statement arguments from line 59 and 80
 						case "age":
 							isGreater = result.get(j).birthday.compareTo(result.get(j+1).birthday) < 0;
 						case "name":
