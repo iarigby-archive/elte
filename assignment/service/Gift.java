@@ -18,7 +18,6 @@ public class Gift {
 	@Override
 	public String toString() {
 		return description + " was given by " + name + " on " + date;
-	
 	}
  
 }

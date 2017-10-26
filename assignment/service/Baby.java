@@ -10,6 +10,7 @@ public class Baby {
 	private Date birthday;
 	private char gender;
 	private static SimpleDateFormat myFormat = new SimpleDateFormat("ddMMyyyy HHmm");
+	private ArrayList<Gift> gifts = new ArrayList<Gift>();
 
 	public Baby() {
 		
@@ -110,6 +111,37 @@ public class Baby {
 
 	public boolean equals(Baby baby) { return this.name.equals(baby.name) && this.birthday == baby.birthday && this.gender == baby.gender;}
 	
+	public void addGift(String name, String description, String date) throws ParseException { 
+
+		gifts.add(new Gift(name, description, myFormat.parse(date))); 
+
+	}
+
+
+	public void addGift(String name, String description) { 
+
+		gifts.add(new Gift(name, description, new Date())); 
+
+	}
+
+	public void addGift(Gift gift) {gifts.add(gift);}
+ 
+	public void printGifts() {
+		
+		System.out.println("Baby " + name + " has following gifts: ");
+		for (Gift gift : gifts) {
+			System.out.println("\t" + gift);
+		}
+
+	}
+
+
+
+
+
+
+
+/*
 
 	//
 	//handling gifts
@@ -136,7 +168,7 @@ public class Baby {
 		
 		gifts.add(new Gift(name, description, new Date())); 
 	}
-
+*/
 
 	/*
 
