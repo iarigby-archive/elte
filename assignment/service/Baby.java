@@ -111,18 +111,15 @@ public class Baby {
 
 	public boolean equals(Baby baby) { return this.name.equals(baby.name) && this.birthday == baby.birthday && this.gender == baby.gender;}
 	
-	public void addGift(String name, String description, String date) throws ParseException { 
+	public static SimpleDateFormat getDateFormat() {return myFormat;}
+	
+	//handling gifts
 
-		gifts.add(new Gift(name, description, myFormat.parse(date))); 
+	public void addGift(String name, String description, String date) throws ParseException { gifts.add(new Gift(name, description, myFormat.parse(date))); }
 
-	}
+	public void addGift(String name, String description, Date date)  { gifts.add(new Gift(name, description, date)); }
 
-
-	public void addGift(String name, String description) { 
-
-		gifts.add(new Gift(name, description, new Date())); 
-
-	}
+	public void addGift(String name, String description) { gifts.add(new Gift(name, description, new Date())); }
 
 	public void addGift(Gift gift) {gifts.add(gift);}
  
