@@ -11,11 +11,12 @@ import javax.persistence.Persistence;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import model.UsageUGH;
 
-public class MainScreenController implements Initializable {
+public class SessionScreenController implements Initializable {
 
 	private EntityManagerFactory emfactory;
     private EntityManager entityManager;
@@ -24,23 +25,13 @@ public class MainScreenController implements Initializable {
     @FXML 
     private VBox window;
     
-    @FXML
-    private HBox sections;
-    
-    @FXML
-    private VBox box;
-    
-    @FXML
-    private VBox currentSessions;
-    
-    @FXML
-    private Button logIn;
-    
-    @FXML
-    private Button register;
-    
-    @FXML
-    private Button adminLogin;
+   @FXML
+   private Label text;
+   
+   @FXML
+   private Label time;
+      
+   private UsageUGH usage;
    
 	@Override
 	public void initialize(URL url, ResourceBundle arg1) {
@@ -63,8 +54,16 @@ public class MainScreenController implements Initializable {
     }
 	
 	@FXML
-	public void goToAdminPanel() {
-		vbox.changeScene(Screens.ADMINPANEL);
+	public void logOut() {
+		entityManager.getTransaction().begin();
+		usage.calculateBill();
+		entityManager.merge(usage);
+		entityManager.getTransaction().commit();
+		((Stage) window.getScene().getWindow()).close();
+	}
+	
+	public void setUsageUGH(UsageUGH usage) {
+		this.usage = usage;
 	}
 		
 }

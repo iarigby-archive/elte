@@ -30,12 +30,10 @@ public class Client {
 	@Column(name = "Personal_ID", length = 128)
 	private String personal_id;
 	
-	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-	private Set<Device> devices;
-	
-	/*@OneToMany(mappedBy = "client", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.MERGE})
 	private Set<UsageUGH> usages;
-	*/
+	
+	
 	public Client() {
 		
 	}
@@ -62,8 +60,8 @@ public class Client {
 		return personal_id;
 	}
 
-	public Set<Device> getDevices() {
-		return devices;
+	public Set<UsageUGH> getUsages() {
+		return usages;
 	}
 
 	public Client setName(String name) {

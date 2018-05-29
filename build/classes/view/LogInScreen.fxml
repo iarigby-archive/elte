@@ -11,25 +11,20 @@
 
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="box" fx:controller="controller.LogInScreenController">
 	<!-- TODO Add Nodes -->
-	<GridPane>
-		<Label text = "Enter Your Personal ID: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-		<TextField fx:id="personal_ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-	</GridPane>
-	<Button text="next" onAction="#listDevices"/>
 	<!-- TODO devices menu -->
-	<TableView fx:id="tableView" GridPane.columnIndex="0"
-                    GridPane.rowIndex="1">
+	<Label text = "Available Devices: " />
+	<TableView fx:id="tableView">
           <columns>
-              <TableColumn fx:id="brandName" text="Device Brand" prefWidth="150">
-                  <!-- <cellValueFactory>
-                      <PropertyValueFactory property="title" />
-                  </cellValueFactory> -->
-              </TableColumn>
-              <TableColumn fx:id="operatingSystem" text="Operating System" prefWidth="150" />
+              <TableColumn fx:id="brandName" text="Device Brand"/>
+              <TableColumn fx:id="operatingSystem" text="Operating System"/>
           </columns>
           <items>
           </items>
-     </TableView>
-	<Button fx:id="signIn" text="Start Using The Internet!" onAction="#signIn"/>
+    </TableView>
+    <GridPane>
+		<Label text = "Enter Your Personal ID: " GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+		<TextField fx:id="personal_ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+	</GridPane>
+	<Button fx:id="signIn" text="Start Using The Computer!" onAction="#signIn"/>
 	<Button text="back to home screen" onAction="#goToMainMenu"/>
 </VBox>

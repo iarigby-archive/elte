@@ -3,18 +3,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="window" fx:controller="controller.MainScreenController">
-	<!-- TODO Add Nodes -->
-	<HBox fx:id="sections">
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="window" fx:controller="controller.SessionScreenController">
+	<Label fx:id="text" text = "yaay" />
+	<Label fx:id="time" />
+	<!-- <HBox fx:id="sections">
 		<VBox fx:id="box">
 			<Button fx:id="logIn" text="log in" onAction="#goToLogIn"/>
 			<Button fx:id="register" text="register" onAction="#goToRegistration"/>
-			<Button fx:id="adminLogin" text="admin panel" onAction="#goToAdminPanel"/>
+			
 		</VBox>
 		<VBox fx:id="currentSessions">
 	
 		</VBox>
-	</HBox>
+	</HBox> -->
+	<Button text="Finish Session" onAction="#logOut"/>
 </VBox>
 

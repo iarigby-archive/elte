@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.TableGenerator;
 
@@ -22,12 +21,8 @@ public class Device {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Device_ID_Generator")
 	private int id;
 	
-	@ManyToOne
-	private Client owner;
-	
-	@OneToMany(mappedBy="device", cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	@OneToMany(mappedBy="device", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
 	private Set<UsageUGH> usages;
-	
 	
 	@Column(length = 128)
 	private String brandName;
@@ -41,8 +36,7 @@ public class Device {
 		
 	}
 	
-	public Device(Client owner, String brandName, String operatingSystem) {
-		this.owner = owner;
+	public Device(String brandName, String operatingSystem) {
 		this.brandName = brandName;
 		this.operatingSystem = operatingSystem;
 		this.isFree = true;
@@ -52,9 +46,6 @@ public class Device {
 		return id;
 	}
 
-	public Client getOwner() {
-		return owner;
-	}
 
 	public String getBrandName() {
 		return brandName;

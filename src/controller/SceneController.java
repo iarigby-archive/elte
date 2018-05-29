@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.VBox;
 
 public class SceneController {
@@ -23,6 +25,15 @@ public class SceneController {
            e.printStackTrace();
        }
 	}
+	
+	public void displayAlert(AlertType at, String title, String text) {
+		Alert alert = new Alert(at);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(text);
+        alert.showAndWait();
+	}
+	
 	
 	public void setBox(VBox box) {
 		this.box = box;

@@ -2,7 +2,7 @@ package model;
 
 import java.time.ZonedDateTime;
 import java.util.Date;
-
+	
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,11 +23,10 @@ public class UsageUGH {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Usage_ID_Generator")
 	private int id;
 	
-	//TODO set relationship
-	/*@ManyToOne
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.MERGE})
 	private Client client;
-	*/
-	@ManyToOne
+	
+	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.MERGE})
 	private Device device;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -38,18 +37,18 @@ public class UsageUGH {
 	
 	private float bill;
 	
+	private final static int PPH = 5;
 	
 	public UsageUGH() {
 		
 	}
 
 	public UsageUGH(Client user, Device device, Date logInTime) {
-		//this.client = user;
+		this.client = user;
 		this.device = device;
 		this.logInTime = logInTime;
-		this.bill = 5;
 	}
-	
+		
 	public UsageUGH(Client user, Device device) {
 		this(user, device, Date.from(ZonedDateTime.now().toInstant()));
 	}
@@ -66,10 +65,10 @@ public class UsageUGH {
 		return id;
 	}
 
-	/*public Client getClient() {
+	public Client getClient() {
 		return client;
 	}
-*/
+
 	public Device getDevice() {
 		return device;
 	}
@@ -88,5 +87,21 @@ public class UsageUGH {
 		return this;
 	}
 
+	public void calculateBill() {
+		calculateBill(Date.from(ZonedDateTime.now().toInstant()));
+	}
+	
+	public void calculateBill(Date time) {
+		if (time.after(logInTime)) {
+			logOutTime = time;
+			float diff = logOutTime.getTime() - logInTime.getTime();
+			System.out.println(diff);
+			System.out.println(diff/(60 * 1000));
+			bill = Math.round(PPH  * diff/(60 * 10))/100;
+			System.out.println(bill);
+		} else {
+			System.out.println("sdageaqw");
+		}
+	}
 	
 }

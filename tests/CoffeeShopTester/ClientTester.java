@@ -1,5 +1,6 @@
 package CoffeeShopTester;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.ZonedDateTime;
@@ -45,21 +46,20 @@ public class ClientTester {
 		begin();
 		entityManager.persist(client);
 		commit();
-		removeNow(client);
 	}
 	
 	@Test
 	public void insertNewDevice() {
-		Device device = new Device(insertNewClient(), "hp", "windows");
+		Device device = new Device("hp", "windows");
 		begin();
 		entityManager.persist(device);
 		commit();
-		removeNow(device, device.getOwner());
+		removeThese.add(device);
 	}
 
 	@Test
 	public void modifyAndDelete() {
-		Device device = new Device(insertNewClient(), "asus", "windows");
+		Device device = new Device("asus", "windows");
 		begin();
 		entityManager.persist(device);
 		commit();
@@ -74,77 +74,82 @@ public class ClientTester {
 		entityManager.remove(newDevice);
 		commit();
 		assertEquals(null, entityManager.find(Device.class, device.getId()));
-		removeNow(device.getOwner());
+		removeThese.add(device);
 	}
 	
 	//TODO three things fail in this test wtf
-	//@Test
+	@Test
 	public void listAndDeleteDevices() {
 		Client cl = insertNewClient().setName("testname");
 		begin();
-		Device d = new Device(cl, "hp", "windows xp");	
-		entityManager.persist(d);
-		Device d2 = new Device(cl, "hp", "windows 10");	
-		entityManager.persist(d2);
+		Device d = new Device("hp", "windows xp");	
+		//entityManager.persist(d);
+		Device d2 = new Device("hp", "windows 10");	
+		//entityManager.persist(d2);
+		UsageUGH u = new UsageUGH(cl,d);
+		entityManager.persist(u);
+		UsageUGH u2 = new UsageUGH(cl, d2);
+		entityManager.persist(u2);
 		commit();
 		Client anotherClient = entityManager.find(Client.class, cl.getId());
 		assertEquals("testname", anotherClient.getName());
-		Set<Device> devices = anotherClient.getDevices();
-		assertEquals(true, devices.contains(d));
-		assertEquals(true, devices.contains(d2));
-		begin();
-		anotherClient.getDevices().clear();
-		commit();
-		devices = anotherClient.getDevices();
-		assertEquals(false, devices.contains(d));
-		Device shouldNotBeFound = entityManager.find(Device.class, d.getId());
-		assertEquals(null, shouldNotBeFound);
-		removeNow(d, d2, cl);
+		Set<UsageUGH> usages = anotherClient.getUsages();
+		usages.forEach(x -> {
+			 int s = x.getDevice().getId();
+			 assertTrue(s == d.getId() || s == d2.getId());
+		 }
+		);
+		removeThese.add(d);
+		removeThese.add(d2);
+		removeThese.add(u);
+		removeThese.add(u2);
 	}
 	
 	@Test
 	public void usageTest() {
 		Client testClient = insertNewClient().setName("logIntestblabla");
 		begin();
-		Device testDevice = new Device(testClient, "testBrand", "ops");
-		commit();
-		begin();
-		UsageUGH usage = new UsageUGH(testClient, testDevice, Date.from(ZonedDateTime.now().toInstant()));
+		Device testDevice = new Device("testBrand", "ops");
+		UsageUGH usage = new UsageUGH(testClient, testDevice);
 		usage.setLogOutTime(Date.from(ZonedDateTime.now().toInstant()));
 		entityManager.persist(usage);
 		commit();
-		//assertEquals(testClient.getId(), entityManager.find(UsageUGH.class, usage.getId()).getClient().getId());
-		removeLater(usage);
-		removeNow(testDevice, testClient, usage);
+		assertEquals(testDevice.getId(), entityManager.find(UsageUGH.class, usage.getId()).getDevice().getId());
+		assertEquals(testClient.getId(), entityManager.find(UsageUGH.class, usage.getId()).getClient().getId());
+		removeThese.add(testDevice);
+		removeThese.add(usage);
 	}
 	
 	@Test
 	public void busyDeviceUsage() {
 		Client testClient = insertNewClient();
 		begin();
-		Device testDevice = new Device(testClient, "testBrand", "ops");
+		Device testDevice = new Device("testBrand", "ops");
 		testDevice.setFree(false);
 		//TODO create client device pair
 		commit();
 		begin();
-		UsageUGH usage = new UsageUGH(testClient, testDevice, Date.from(ZonedDateTime.now().toInstant()));
+		UsageUGH usage = new UsageUGH(testClient, testDevice);
 		if (usage.getDevice().isFree()) entityManager.persist(usage);
 		commit();
 		assertEquals(null, entityManager.find(UsageUGH.class, usage.getId()));
 		begin();
 		testDevice.setFree(true);
-		usage = new UsageUGH(testClient, testDevice, Date.from(ZonedDateTime.now().toInstant()));
+		commit();
+		begin();
+		usage = new UsageUGH(testClient, testDevice);
 		if (usage.getDevice().isFree()) entityManager.persist(usage);
 		commit();
 		assertEquals(usage, entityManager.find(UsageUGH.class, usage.getId()));
-		removeNow(testDevice, testClient, usage);
+		removeThese.add(testDevice);
+		removeThese.add(usage);
 	}
 	
 	@Test
 	public void listAllUsages() {
 		emptyAllUsages();
 		Client client = newClient().setName("listAllUsages");
-		Device device = new Device(client, "whatever", "whatever");
+		Device device = new Device("whatever", "whatever");
 		// TODO make random numbers
 		UsageUGH firstUsage = new UsageUGH(client, device).setBill(3);
 		UsageUGH secondUsage = new UsageUGH(client, device).setBill(5);
@@ -163,8 +168,12 @@ public class ClientTester {
         	sum += usage.getBill();
         }
         assertEquals(8, sum);
-        //removeNow(device, client, firstUsage, secondUsage);
+        removeThese.add(device);
+        removeThese.add(firstUsage);
+        removeThese.add(secondUsage);
 	}
+	
+	
 	
 	//TODO method including begin, persist, commit -_-
 	
@@ -182,34 +191,7 @@ public class ClientTester {
         commit();
 	}
 	
-	private void emptyAllClients() {
-		begin();
-		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Client> allUsagesQuery = cb.createQuery(Client.class);
-        Root<Client> allUsage = allUsagesQuery.from(Client.class);
-        allUsagesQuery.select(allUsage);
-        List<Client> allUsages = entityManager.createQuery(allUsagesQuery).getResultList();
-        for (Client usage: allUsages) {
-        	entityManager.remove(usage);
-        }
-        commit();
-	}
-	
-	private void removeLater(Object... things) {
-		for (Object thing : things) {
-			removeThese.add(thing);
-		}
-	}
-	
-	//TODO don't want to use this -_-
-	private void removeNow(Object... things) {
-		begin();
-		for (Object thing : things) {
-			entityManager.remove(thing);
-		}
-		commit();
-	}
-	
+
 	private Client newClient() {
 		Client sth = new Client("random", "someaddress", "231AHS2");
 		removeThese.add(sth);
@@ -234,7 +216,6 @@ public class ClientTester {
 	
 	@After
 	public void cleanup() {
-		//emptyAllDevices();
 		cleanTestCases();
 		entityManager.close();
 		emfactory.close();
@@ -243,12 +224,7 @@ public class ClientTester {
 	private void cleanTestCases() {
 		begin();
 		for ( Object remove : removeThese ) {
-			try {
-				entityManager.remove(remove); 
-			} catch(Exception e) {
-				System.out.println("whatever");
-				//whatever it's not there
-			}
+			entityManager.remove(remove);	
 		}
 		commit();
 	}

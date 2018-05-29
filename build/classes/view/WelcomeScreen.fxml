@@ -10,7 +10,7 @@
 		<VBox fx:id="box">
 			<Button fx:id="logIn" text="log in" onAction="#goToLogIn"/>
 			<Button fx:id="register" text="register" onAction="#goToRegistration"/>
-			<Button fx:id="adminLogin" text="admin panel"/>
+			<Button fx:id="adminLogin" text="admin panel" onAction="#goToAdminPanel"/>
 		</VBox>
 		<VBox fx:id="currentSessions">
 	
