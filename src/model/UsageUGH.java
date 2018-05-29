@@ -23,10 +23,10 @@ public class UsageUGH {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Usage_ID_Generator")
 	private int id;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.MERGE})
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Client client;
 	
-	@ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.MERGE})
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Device device;
 	
 	@Temporal(TemporalType.TIMESTAMP)
@@ -97,7 +97,7 @@ public class UsageUGH {
 			float diff = logOutTime.getTime() - logInTime.getTime();
 			System.out.println(diff);
 			System.out.println(diff/(60 * 1000));
-			bill = Math.round(PPH  * diff/(60 * 10))/100;
+			bill = Math.round(PPH  * diff/10000);
 			System.out.println(bill);
 		} else {
 			System.out.println("sdageaqw");

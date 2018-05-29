@@ -9,6 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import helpers.Context;
+import helpers.SceneController;
+import helpers.Screens;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,6 +29,9 @@ public class MainScreenController implements Initializable {
     
     @FXML
     private HBox sections;
+    
+    @FXML
+    private VBox content;
     
     @FXML
     private VBox box;
@@ -49,7 +55,7 @@ public class MainScreenController implements Initializable {
         entityManager = emfactory.createEntityManager();
         Context.getInstance().setEntityManager(entityManager);        
         //menuBar.setFocusTraversable(true);
-        vbox = new SceneController(window);
+        vbox = new SceneController(content);
 	}
 	
 	@FXML

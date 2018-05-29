@@ -1,4 +1,4 @@
-package controller;
+package helpers;
 
 import javax.persistence.EntityManager;
 

@@ -1,6 +1,6 @@
 package main;
 
-import controller.Screens;
+import helpers.Screens;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,9 +12,10 @@ public class Main extends Application {
 	 public void start(Stage primaryStage) {
 		 try {
 			VBox root = (VBox) FXMLLoader.load(getClass().getResource(Screens.MAIN.toString()));
-			Scene scene = new Scene(root, 500, 700);
+			Scene scene = new Scene(root, 900, 700);
             //scene.getStylesheets().add(getClass().getResource("../view/style.css").toExternalForm());
-            primaryStage.setScene(scene);
+			scene.getStylesheets().add(getClass().getResource("main.css").toExternalForm());
+			primaryStage.setScene(scene);
             primaryStage.setResizable(true);
             primaryStage.setTitle("Internet Coffee Shop");
             primaryStage.show();

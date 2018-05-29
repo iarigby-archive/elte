@@ -5,19 +5,11 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
+<?scenebuilder-stylesheet main.css?>
+
 <VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="window" fx:controller="controller.SessionScreenController">
 	<Label fx:id="text" text = "yaay" />
 	<Label fx:id="time" />
-	<!-- <HBox fx:id="sections">
-		<VBox fx:id="box">
-			<Button fx:id="logIn" text="log in" onAction="#goToLogIn"/>
-			<Button fx:id="register" text="register" onAction="#goToRegistration"/>
-			
-		</VBox>
-		<VBox fx:id="currentSessions">
-	
-		</VBox>
-	</HBox> -->
 	<Button text="Finish Session" onAction="#logOut"/>
 </VBox>
 

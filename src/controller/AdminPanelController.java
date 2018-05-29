@@ -3,63 +3,40 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import helpers.Context;
+import helpers.SceneController;
+import helpers.Screens;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import model.Device;
 
 public class AdminPanelController implements Initializable{
 	
-	private EntityManager entityManager;
 	private SceneController vbox;
+	private SceneController contentBox;
+	private EntityManager entityManager;
+	
 	
 	@FXML
 	private VBox box;
+
+	@FXML
+	private HBox menu;
 	
 	@FXML
-	private GridPane newDevicePane;
-	@FXML
-	private TextField brandName;
+	private VBox content;
 	
-	@FXML
-	private TextField operatingSystem;
-	
-	@FXML
-	private Button addDevice;
-	//you can use id number to log in
-	//
-	@FXML
-	private Label finalMessage;
 	
 	@Override
 	public void initialize(URL url, ResourceBundle arg1) {
 		entityManager = Context.getInstance().getEntityManager();
 		vbox = new SceneController(box);
-		box.getChildren().remove(newDevicePane);
-	}
-	
-	@FXML 
-	public void addDevice() {
-		if(brandName.getText().isEmpty() || operatingSystem.getText().isEmpty()) {
-			vbox.displayAlert(AlertType.ERROR, "Empty Fields", "Please fill in all the fields");
- 		} else {
-			Device device = new Device(brandName.getText(), operatingSystem.getText());
-			entityManager.getTransaction().begin();
-			entityManager.persist(device);
-			entityManager.getTransaction().commit();
-			brandName.clear();
-			operatingSystem.clear();
-			
-			//finalMessage.setText("congrats, you've registered. Use your personal ID to log in");
- 		}
-		
-	}
+		contentBox = new SceneController(content);
+	}	
 	
 	@FXML
 	public void goToMainMenu() {
@@ -67,8 +44,28 @@ public class AdminPanelController implements Initializable{
 	}
 	
 	@FXML
-	public void showNewDeviceMenu() {
-		box.getChildren().add(1, newDevicePane);
+	public void goToDeviceMenu() {
+		contentBox.changeScene(Screens.MODIFYDEVICES);
 	}
 	
+	@FXML
+	public void listUsages() {
+		contentBox.changeScene(Screens.LISTUSAGES);
+	}
+	
+	@FXML
+	public void makeTheDreamComeTrue() {
+		content.getChildren().clear();
+		String qlString = "SELECT SUM(u.bill) FROM UsageUGH u";
+		Query q = entityManager.createQuery(qlString);
+		double sum = (double) q.getSingleResult();
+		Label l = new Label();
+		l.setText("All I want for Christmas is " + sum);
+		content.getChildren().add(l);
+	}
+	
+	@FXML
+	public void listClients() {
+		contentBox.changeScene(Screens.LISTCLIENTS);
+	}
 }

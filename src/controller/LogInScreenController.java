@@ -10,6 +10,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import helpers.Context;
+import helpers.SceneController;
+import helpers.Screens;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -81,6 +84,7 @@ public class LogInScreenController implements Initializable{
         		cb.equal(root.get(Device_.isFree), true)));
         devicesQuery.select(root);
         List<Device> freeDevices = entityManager.createQuery(devicesQuery).getResultList();
+        tableView.getItems().clear();
         for (Device device : freeDevices) {
         	tableView.getItems().add(device);
         }
@@ -104,9 +108,11 @@ public class LogInScreenController implements Initializable{
 		} else {
 			UsageUGH usage = new UsageUGH(client, selectedDevice);
 			entityManager.getTransaction().begin();
+			selectedDevice.setFree(false);
 			entityManager.persist(usage);
 			entityManager.getTransaction().commit();
-			openNewSession(usage);	
+			openNewSession(usage);
+			listDevices();
 		}
 	}
 	
@@ -118,15 +124,17 @@ public class LogInScreenController implements Initializable{
 	private void openNewSession(UsageUGH usage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(Screens.SESSION.toString()));
-			Scene scene = new Scene((VBox) loader.load(), 600, 400);
+			Scene scene = new Scene((VBox) loader.load(), 200, 150);
 	        Stage stage = new Stage();
 	        stage.setTitle("New Window");
 	        stage.setScene(scene);
 	        stage.show();
 	        ((SessionScreenController) loader.getController()).setUsageUGH(usage);
-	       
 	    } catch (IOException e) {
 	    	vbox.displayAlert(AlertType.ERROR, "REEEE", "REEEE");
+	    	entityManager.getTransaction().begin();
+	    	usage.getDevice().setFree(true);
+	    	entityManager.getTransaction().commit();
 	    	e.printStackTrace();
 	    }
 	}

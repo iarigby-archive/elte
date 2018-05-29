@@ -30,7 +30,7 @@ public class Client {
 	@Column(name = "Personal_ID", length = 128)
 	private String personal_id;
 	
-	@OneToMany(mappedBy = "client", cascade = {CascadeType.PERSIST,CascadeType.REFRESH, CascadeType.MERGE})
+	@OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
 	private Set<UsageUGH> usages;
 	
 	
@@ -75,6 +75,11 @@ public class Client {
 
 	public void setPersonal_id(String personal_id) {
 		this.personal_id = personal_id;
+	}
+	
+	@Override
+	public String toString() {
+		return "" + id;
 	}
 
 	

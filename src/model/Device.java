@@ -21,7 +21,7 @@ public class Device {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "Device_ID_Generator")
 	private int id;
 	
-	@OneToMany(mappedBy="device", cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
+	@OneToMany(mappedBy="device", cascade = CascadeType.ALL)
 	private Set<UsageUGH> usages;
 	
 	@Column(length = 128)
@@ -77,9 +77,7 @@ public class Device {
 	
 	@Override
 	public String toString() {
-		return brandName + " running " + operatingSystem + ", id: " + id;
+		return "" + id;
 	}
-	
-	
-	
+
 }

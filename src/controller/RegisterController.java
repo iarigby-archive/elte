@@ -6,6 +6,9 @@ import java.util.ResourceBundle;
 
 import javax.persistence.EntityManager;
 
+import helpers.Context;
+import helpers.SceneController;
+import helpers.Screens;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert.AlertType;
@@ -53,19 +56,18 @@ public class RegisterController implements Initializable{
 	
 	@FXML 
 	public void register() {
-		boolean canRegister = true;
+		boolean missingFields = false;
 		for (TextField f : requiredFields) {
-			if (f.getText().isEmpty()) canRegister = false;
+			if (f.getText().isEmpty()) missingFields = true;
 		}
-		if (canRegister) {
-			Client client = new Client(name.getText(), address.getText(), personal_id.getText());
-			entityManager.getTransaction().begin();
-			entityManager.persist(client);
-			entityManager.getTransaction().commit();
+		if (missingFields) {
+			vbox.displayAlert(AlertType.ERROR, "Missing Fields", "Please fill in all the fields");
+		} else if (userExists(personal_id.getText())) {
+			vbox.displayAlert(AlertType.ERROR, "Error", "User with this ID already exists");
+		} else {
+			addClient();
 			finalMessage.setText("congrats, you've registered. Use your personal ID to log in");
 			for (TextField f : requiredFields) f.clear();
-		} else {
-			vbox.displayAlert(AlertType.ERROR, "Missing Fields", "Please fill in all the fields");
 		}
 	}
 	
@@ -73,4 +75,19 @@ public class RegisterController implements Initializable{
 	public void goToMainMenu() {
 		vbox.changeScene(Screens.MAIN);
 	}
+	
+	private void addClient() {
+		Client client = new Client(name.getText(), address.getText(), personal_id.getText());
+		entityManager.getTransaction().begin();
+		entityManager.persist(client);
+		entityManager.getTransaction().commit();
+		
+	}
+	
+	private boolean userExists(String id) {
+		String s = "select count(e) from Client e where e.personal_id = :id";
+	    Long count = (Long) entityManager.createQuery(s).setParameter("id", id).getSingleResult();
+	    return count > 0; 
+	}
+	
 }

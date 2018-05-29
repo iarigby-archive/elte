@@ -4,17 +4,17 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.control.Button?>
 
-<VBox xmlns:fx="http://javafx.com/fxml/1" fx:id="window" fx:controller="controller.MainScreenController">
+<VBox xmlns:fx="http://javafx.com/fxml/1"  fx:id="window" fx:controller="controller.MainScreenController">
 	<!-- TODO Add Nodes -->
-	<HBox fx:id="sections">
-		<VBox fx:id="box">
-			<Button fx:id="logIn" text="log in" onAction="#goToLogIn"/>
-			<Button fx:id="register" text="register" onAction="#goToRegistration"/>
-			<Button fx:id="adminLogin" text="admin panel" onAction="#goToAdminPanel"/>
-		</VBox>
-		<VBox fx:id="currentSessions">
-	
-		</VBox>
-	</HBox>
+	<VBox fx:id="content">
+		<HBox fx:id="sections" styleClass="mainScreen">
+			<VBox fx:id="box">
+				<Button fx:id="logIn" text="log in" onAction="#goToLogIn"/>
+				<Button fx:id="register" text="register" onAction="#goToRegistration"/>
+				<Button fx:id="adminLogin" text="admin panel" onAction="#goToAdminPanel"/>
+			</VBox>
+		
+		</HBox>
+	</VBox>
 </VBox>
 
