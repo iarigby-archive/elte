@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<BorderPane>
+<!-- 	<left> -->
+<!-- 		<Button /> -->
+<!-- 	</left> -->
+<!-- 	<top> -->
+<!-- 		<Button /> -->
+<!-- 	</top> -->
+
+
+	<center> <!-- how does it look like on top, bottom, right? -->
+<!-- 	this site helps you as it specifies possible style attributes and their values -->
+<!-- 		https://docs.oracle.com/javase/8/javafx/api/javafx/scene/doc-files/cssref.html -->
+		<HBox style="-fx-border-style: solid; -fx-border-color: red; -fx-alignment: center; -fx-spacing: 20px">
+			<children>
+				<Button text="button1" prefHeight="10" prefWidth="60" />
+				<Button text="button2" prefHeight="10" prefWidth="60" />
+			</children>
+		</HBox>
+	</center>
+</BorderPane>
