@@ -1,0 +1,18 @@
+.button {
+	-fx-pref-width: 120.0px;
+	-fx-pref-height: 120.0px;
+	-fx-background-color: darkgreen;
+	-fx-border-style: solid;
+}
+
+.button:hover {
+	-fx-background-color: lightblue;
+}
+
+.button:pressed {
+	-fx-background-color: lightgreen;
+}
+
+.button:focused {
+	-fx-border-color: white;
+}

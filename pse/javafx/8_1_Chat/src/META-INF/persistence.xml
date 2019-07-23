@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+
+	<!-- change your persistence unit name to an actual one -->
+	<persistence-unit name="Chat_PU" transaction-type="RESOURCE_LOCAL">
+		<class>model.Note</class>
+		<class>model.User</class>
+		<class>model.Writer</class>
+		<class>model.Admin</class>
+
+		<!-- add your entities one by one -->
+
+		<properties>
+			<!-- set up your database name -->
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/chatdb" />
+			<property name="javax.persistence.jdbc.user" value="tanulo" />
+			<property name="javax.persistence.jdbc.password" value="asd123" />
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="eclipselink.logging.level" value="FINEST" />
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

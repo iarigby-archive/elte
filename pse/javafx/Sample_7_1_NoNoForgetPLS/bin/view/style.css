@@ -1,0 +1,39 @@
+.text-field {
+	-fx-alignment: center-left;
+	-fx-min-height: 30.0px;
+}
+
+.date-picker, .text-field, #goButton {
+	-fx-min-width: 230.0px;
+}
+
+#goButton {
+	-fx-font-size: 15.0px;
+	-fx-min-height: 50.0px;
+}
+
+#inputvbox, #hbox {
+	-fx-spacing: 30.0px;
+}
+
+#labelvbox {
+	-fx-spacing: 50.0px;
+}
+
+#newNotePane {
+	-fx-hgap: 15.0px;
+	-fx-vgap: 25.0px;
+	-fx-padding: 20.0px;
+}
+
+.check-box {
+	-fx-font-size: 20.0px;
+}
+
+.critical {
+	-fx-background-color: red;
+}
+
+.major {
+	-fx-background-color: yellow;
+}

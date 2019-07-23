@@ -1,0 +1,48 @@
+.mainPane {
+	-fx-background-color: linear-gradient( from 100.0% 0.0% to 100.0% 100.0%, rgb(230.0,230.0,230.0) 0.0, rgb(200.0,200.0,100.0) 100.0);
+}
+
+.sizeButtons {
+	-fx-alignment: center;
+	-fx-spacing: 10.0px;
+	-fx-padding: 5.0px;
+}
+
+.sizeButtons .button {
+	-fx-font-size: 15.0px;
+	-fx-pref-height: 45.0px;
+	-fx-pref-width: 60.0px;
+}
+
+.tableView {
+	-fx-padding: 5.0px;
+	-fx-alignment: center;
+	-fx-hgap: 10.0px;
+	-fx-vgap: 10.0px;
+}
+
+.tableView .button, .tableView  .grayBackground {
+	-fx-font-size: 15.0px;
+	-fx-background-radius: 25.0px;
+	-fx-pref-height: 50.0px;
+	-fx-pref-width: 50.0px;
+	-fx-alignment: center;
+}
+
+.tableView .button {
+	-fx-background-color: rgb(100.0,150.0,202.0);
+}
+
+.tableView .button:hover {
+	-fx-background-color: rgb(150.0,200.0,250.0);	
+}
+
+.tableView .button:pressed {
+	-fx-background-color: rgb(50.0,100.0,150.0);	
+}
+
+.tableView .grayBackground {
+	-fx-background-color: darkgray;
+}
+
+
