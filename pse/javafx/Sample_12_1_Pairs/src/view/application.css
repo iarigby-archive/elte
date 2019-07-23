@@ -1,0 +1,14 @@
+.sizeHBox {
+	-fx-padding: 15.0px;
+	-fx-spacing: 20.0px;
+}
+
+.sizeHBox .button {
+	-fx-pref-width: 100.0px;
+	-fx-pref-height: 35.0px;
+}
+
+.tableButton {
+	-fx-pref-height: 200.0px;
+	-fx-pref-width: 200.0px;
+}

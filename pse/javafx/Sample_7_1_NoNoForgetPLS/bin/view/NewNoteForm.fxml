@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<GridPane id="newNotePane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewNoteController">
+	<children>
+		<Label text="Title:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		<TextField fx:id="title" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+		<Label text="Content:" GridPane.columnIndex="0"
+			GridPane.rowIndex="2" />
+		<TextArea fx:id="content" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+		<Label text="Name:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+		<TextField fx:id="creator" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+		<Label text="Priority:" GridPane.columnIndex="2"
+			GridPane.rowIndex="1" />
+		<HBox id="hbox" GridPane.columnIndex="3" GridPane.rowIndex="1">
+			<children>
+				<CheckBox fx:id="major" text="Major" />
+				<CheckBox fx:id="critical" text="Critical" />
+			</children>
+		</HBox>
+
+		<VBox fx:id="deadlineLabels" id="labelvbox" GridPane.columnIndex="2" GridPane.rowIndex="2">
+			<children>
+				<Label text="End date:" />
+				<Label text="End hour:" />
+			</children>
+		</VBox>
+		<VBox fx:id="deadlines" id="inputvbox" GridPane.columnIndex="3" GridPane.rowIndex="2">
+			<children>
+				<DatePicker fx:id="date" />
+				<TextField fx:id="time" promptText="HH:mm" />
+			</children>
+		</VBox>
+
+		<Button id="goButton" text="Create Note!" onAction="#createNote" GridPane.columnIndex="3"
+			GridPane.rowIndex="3" />
+	</children>
+</GridPane>
+

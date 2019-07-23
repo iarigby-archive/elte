@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+	
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" 
+			fx:controller="controller.PairsController"
+			styleClass="mainPane">
+	<top>
+		<HBox styleClass="sizeButtons">
+			<Button fx:id="txt" text="2 x 2" />
+			<Button fx:id="fxf" text="4 x 4" />
+			<Button fx:id="sxs" text="6 x 6" />
+		</HBox>
+	</top>
+	<center>
+		<GridPane fx:id="gamePane" styleClass="gameView" />
+	</center>
+</BorderPane>

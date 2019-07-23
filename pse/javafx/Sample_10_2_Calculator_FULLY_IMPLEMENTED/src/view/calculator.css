@@ -1,0 +1,49 @@
+.outputGroup {
+	-fx-alignment: center-right;
+	-fx-border-style: solid;
+	-fx-background-color: linear-gradient( from 100.0% 0.0% to 100.0% 100.0%, rgb(179.0,179.0,179.0) 0.0, rgb(219.0,219.0,219.0) 100.0);
+}
+
+.outputGroup .label {
+	-fx-padding: 5.0px;
+}
+
+.outputGroup .operand {
+	-fx-font-size: 23.0px;
+}
+
+.button {
+	-fx-font-size: 15.0px;
+	-fx-pref-height: 45.0px;
+	-fx-pref-width: 40.0px;
+	-fx-border-style: dotted;
+}
+
+.mainPane {
+	-fx-padding: 10.0px;
+	-fx-background-color: linear-gradient( from 100.0% 0.0% to 100.0% 100.0%, rgb(230.0,230.0,230.0) 0.0, rgb(204.0,255.0,102.0) 100.0);
+}
+
+.buttonGroup {
+	-fx-spacing: 5.0px;
+	-fx-padding: 15.0px 0.0px 0.0px;
+}
+
+.buttonGroup .buttons {
+	-fx-hgap: 5.0px;
+	-fx-vgap: 5.0px;
+}
+
+.equalsButton {
+	-fx-pref-height: 95.0px;
+	-fx-font-size: 23.0px;
+	-fx-background-color: lightgreen;
+}
+
+.zeroButton, .equalsButton {
+	-fx-max-width: 145.0px;
+}
+
+.equalsButton:hover {
+	-fx-background-color: rgb(38.0,226.0,29.0);
+}

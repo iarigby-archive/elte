@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+
+<GridPane>
+	<children>
+		<Button text="(0, 0)" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+		<Button text="(0, 1)" GridPane.rowIndex="0" GridPane.columnIndex="1" />
+		<Button text="(0, 2)" GridPane.rowIndex="0" GridPane.columnIndex="2" />
+		<Button text="(1, 0)" GridPane.rowIndex="1" GridPane.columnIndex="0" />
+		
+<!-- 		<Button text="(4, 6)" GridPane.rowIndex="4" GridPane.columnIndex="6" /> -->
+		
+		<Button text="(8, 10)" GridPane.rowIndex="8" GridPane.columnIndex="10" />
+	</children>
+</GridPane>
