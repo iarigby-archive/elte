@@ -1,1 +1,4 @@
-"# elte-pse" 
+# elte
+
+## pse
+both semesters
