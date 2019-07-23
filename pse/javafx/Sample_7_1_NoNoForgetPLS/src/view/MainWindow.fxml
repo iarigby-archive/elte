@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="controller.MenuController">
+	<MenuBar fx:id="menuBar">
+		<menus>
+			<Menu text="Note">
+				<items>
+					<MenuItem text="List all" onAction="#createListNotesPage" />
+					<MenuItem text="Create New..." onAction="#createNewPage" />
+				</items>
+			</Menu>
+			<Menu text="People">
+				<items>
+					<MenuItem text="List all people" onAction="#createListPeoplePage" />
+				</items>
+			</Menu>
+		</menus>
+	</MenuBar>
+	<Pane fx:id="content" />
+</VBox>

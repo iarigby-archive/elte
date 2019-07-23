@@ -1,0 +1,21 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+.menu {
+	-fx-padding: 5.0px;
+}
+
+.mainPane {
+	-fx-padding:10.0px;
+	-fx-background-color: #aaddd1;
+}
+
+.buttons .button{
+	-fx-background-color: #ffafc6;
+	-fx-pref-height: 40.0px;
+	-fx-pref-width: 40.0px;
+}
+
+
+
+
+
